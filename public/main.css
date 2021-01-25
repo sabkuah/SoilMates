@@ -1,4 +1,25 @@
-header,
-nav {
-  font-family: "Cinzel", serif;
+nav,
+footer {
+  font-family: "Poiret One", cursive;
+}
+
+.parallax-bg {
+  background-image: url("cacti-bg.jpg");
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.home__text {
+  height: 300px;
+  width: 500px;
+  opacity: 0.3;
+  background-color: #ffffff;
+  opacity: 0.6;
+}
+
+.footer__text {
+  font-size: 70%;
 }
