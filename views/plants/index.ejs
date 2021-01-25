@@ -1,0 +1,23 @@
+<% layout('layouts/boilerplate')%>
+
+<h1>All Plants</h1>
+<div class="row d-flex justify-content-center">
+  <% for (let plant of plants){%>
+  <div class="card text-center mx-2" style="width: 15rem">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <img src="<%=plant.image%>" class="img-fluid card-img" />
+      <a href="#!">
+        <div
+          class="mask"
+          style="background-color: rgba(251, 251, 251, 0.15)"
+        ></div>
+      </a>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= plant.name %></h5>
+      <p class="card-text"><%= plant.description%></p>
+      <a href="/plants/<%=plant._id%>" class="btn btn-primary">View</a>
+    </div>
+  </div>
+  <% }%>
+</div>
