@@ -25,9 +25,9 @@ db.once("open", () => {
 //========================
 const app = express();
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "/views"));
+app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsmate); //for partials
-app.use(express.static(path.join(__dirname, "/public"))); //for stylesheets
+app.use(express.static(path.join(__dirname, "public"))); //for stylesheets
 
 //========================
 //       ROUTES

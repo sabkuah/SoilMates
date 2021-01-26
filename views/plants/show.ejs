@@ -1,3 +1,19 @@
 <% layout('layouts/boilerplate')%>
-
-<h1><%= plant.name %></h1>
+<div class="plant__show">
+  <div class="row d-flex justify-content-center">
+    <div class="card col-5">
+      <h3><%= plant.name %></h3>
+      <div class="plant__show-details card-body">
+        <p>Type: <%= plant.type %></p>
+        <p>Water Needs: <%= plant.water %></p>
+        <p>Light Needs: <%= plant.light %></p>
+        <p>Description: <%= plant.description %></p>
+        <p>PetFriendly? <%= plant.isPetFriendly %></p>
+        <p>Find at:: <%= plant.stores %></p>
+      </div>
+    </div>
+    <div class="col-5 d-flex justify-content-center">
+      <img src="<%= plant.image %>" class="img-fluid" alt="<%= plant.name %>" />
+    </div>
+  </div>
+</div>

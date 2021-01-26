@@ -4,25 +4,34 @@ footer {
   font-family: "Poiret One", cursive;
 }
 
+main {
+  padding-bottom: 5%;
+}
+
 .parallax-bg {
   background-image: url("cacti-bg.jpg");
-  min-height: 100vh;
+  height: 100vh;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-body {
+/* body {
   background-color: #fafafa;
-}
+} */
 
 .home__text {
-  height: 250px;
+  /* height: 250px;
   width: 500px;
   opacity: 0.3;
-  background-color: #ffffff;
-  opacity: 0.6;
+  background-color: #ffffff; */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
 }
 
 .card-img {
@@ -32,4 +41,27 @@ body {
 
 .footer__text {
   font-size: 70%;
+}
+/* Plant Index */
+.plant__index {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+.card {
+  opacity: 0.85;
+}
+/* Plant Show */
+.plant__show {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+}
+
+.plant__show-image {
+  width: 40%;
 }
