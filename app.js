@@ -25,9 +25,9 @@ db.once("open", () => {
 //========================
 const app = express();
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "/views"));
 app.engine("ejs", ejsmate); //for partials
-app.use(express.static(path.join(__dirname, "public"))); //for stylesheets
+app.use(express.static(path.join(__dirname, "/public"))); //for stylesheets
 
 //========================
 //       ROUTES
@@ -45,9 +45,8 @@ app.get("/plants", async (req, res) => {
 });
 
 //  Show Plant Details
-app.get("/plant/:id", async (req, res) => {
-  const id = req.params;
-  const plant = await Plant.findById(id);
+app.get("/plants/:id", async (req, res) => {
+  const plant = await Plant.findById(req.params.id);
   res.render("plants/show", { plant });
 });
 
