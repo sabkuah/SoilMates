@@ -7,6 +7,7 @@ footer {
 main {
   padding-bottom: 5%;
 }
+/* Parallax Settings */
 
 .parallax-bg {
   background-image: url("cacti-bg.jpg");
@@ -17,15 +18,20 @@ main {
   background-size: cover;
 }
 
+.plant__index,
+.plant__new {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+}
+
 /* body {
   background-color: #fafafa;
 } */
 
 .home__text {
-  /* height: 250px;
-  width: 500px;
-  opacity: 0.3;
-  background-color: #ffffff; */
   position: absolute;
   left: 0;
   top: 50%;
@@ -43,13 +49,6 @@ main {
   font-size: 70%;
 }
 /* Plant Index */
-.plant__index {
-  position: absolute;
-  left: 0;
-  top: 10%;
-  width: 100%;
-  text-align: center;
-}
 
 .card {
   opacity: 0.85;
@@ -60,8 +59,4 @@ main {
   left: 0;
   top: 10%;
   width: 100%;
-}
-
-.plant__show-image {
-  width: 40%;
 }
