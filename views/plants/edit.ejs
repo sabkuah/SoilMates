@@ -2,15 +2,15 @@
 
   <div class="plant__new container">
     <h1>Edit Plant</h1>
-    <form action="/plants/<%= plant._id %>?_method=PUT" method="POST">
+    <form action="/plants/<%= plant._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
       <div class="row">
         <div class="col">
           <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" id="name" value="<%= plant.name %>"/>
+          <input type="text" class="form-control" name="name" id="name" value="<%= plant.name %>" required/>
         </div>
         <div class="col">
           <label for="image">Image URL</label>
-          <input type="text" class="form-control" id="image" name="image" value="<%= plant.image %>"/>
+          <input type="text" class="form-control" id="image" name="image" value="<%= plant.image %>" required/>
         </div>
       </div>
 
@@ -18,7 +18,7 @@
         <div class="col">
           <div class="form-group">
             <label for="type">Type 🌱</label>
-            <select class="form-control" id="type" name="type">
+            <select class="form-control" id="type" name="type" required>
               <% for( let type of formSelects.plantTypes) { %>
               <option value="<%= type %>" <%=plant.type === type ? 'selected' : ""%>>
         <%= type %></option>
@@ -29,7 +29,7 @@
         <div class="col">
           <div class="form-group">
             <label for="water">Water Needs💧</label>
-            <select class="form-control" id="water" name="water">
+            <select class="form-control" id="water" name="water" required>
               <% for( let need of formSelects.waterNeeds) { %>
               <option value="<%= need %>" <%=plant.water === need ? 'selected' : ""%> ><%= need %></option>
               <% } %>
@@ -39,7 +39,7 @@
         <div class="col">
           <div class="form-group">
             <label for="light">Light Needs 🔆 </label>
-            <select class="form-control" id="light">
+            <select class="form-control" id="light" required>
               <% for( let need of formSelects.lightNeeds) { %>
               <option value="<%= need %>" <%=plant.light === need ? 'selected' : ""%>><%= need %></option>
               <% } %>
@@ -76,7 +76,7 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="3" name="description"><%= plant.description %></textarea>
+        <textarea class="form-control" id="description" rows="3" name="description" required><%= plant.description %></textarea>
       </div>
 
       <button class="btn btn-success">Submit</button>

@@ -2,15 +2,15 @@
 
   <div class="plant__new container">
     <h1>Add A New Plant</h1>
-    <form action="/plants/new" method="POST">
+    <form action="/plants/new" method="POST" novalidate class="needs-validation">
       <div class="row">
         <div class="col">
           <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" id="name" />
+          <input type="text" class="form-control" name="name" id="name" required/>
         </div>
         <div class="col">
           <label for="image">Image URL</label>
-          <input type="text" class="form-control" id="image" name="image"/>
+          <input type="text" class="form-control" id="image" name="image" required/>
         </div>
       </div>
 
@@ -18,7 +18,7 @@
         <div class="col">
           <div class="form-group">
             <label for="type">Type 🌱</label>
-            <select class="form-control" id="type" name="type">
+            <select class="form-control" id="type" name="type" required>
               <% for( let type of formSelects.plantTypes) { %>
               <option value="<%= type %>"><%= type %></option>
               <% } %>
@@ -28,7 +28,7 @@
         <div class="col">
           <div class="form-group">
             <label for="water">Water Needs💧</label>
-            <select class="form-control" id="water" name="water">
+            <select class="form-control" id="water" name="water" required>
               <% for( let need of formSelects.waterNeeds) { %>
               <option value="<%= need %>"><%= need %></option>
               <% } %>
@@ -38,7 +38,7 @@
         <div class="col">
           <div class="form-group">
             <label for="light">Light Needs 🔆 </label>
-            <select class="form-control" id="light">
+            <select class="form-control" id="light" required>
               <% for( let need of formSelects.lightNeeds) { %>
               <option value="<%= need %>"><%= need %></option>
               <% } %>
@@ -74,7 +74,7 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
       </div>
 
       <button class="btn btn-success">Submit</button>

@@ -31,6 +31,7 @@ app.engine("ejs", ejsmate); //for partials
 app.use(express.static(path.join(__dirname, "public"))); //for stylesheets
 app.use(express.urlencoded({ extended: true })); //for req body
 app.use(methodOverride("_method")); //for form PUT, DEL requests
+
 //========================
 //       ROUTES
 //========================
