@@ -84,6 +84,12 @@ app.put("/plants/:id", async (req, res) => {
 });
 
 //  Delete Plant
+app.delete("/plants/:id", async (req, res) => {
+  const { id } = req.params;
+  const plant = await Plant.findByIdAndDelete(id);
+  console.log("Plant deleted>>", plant);
+  res.redirect("/plants");
+});
 
 app.listen(5000, () => {
   console.log("App running on Port 5000...");

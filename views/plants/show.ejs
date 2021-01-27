@@ -16,7 +16,7 @@
           <button class="btn btn-info">Edit</button>
         </a>
 
-        <form action="/plants/<%= plant._id %>/delete?_method=DELETE">
+        <form action="/plants/<%= plant._id %>?_method=DELETE" method="POST">
           <button class="btn btn-danger">Delete</button>
         </form>
       </div>

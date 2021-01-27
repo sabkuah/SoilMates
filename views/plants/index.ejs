@@ -1,9 +1,9 @@
 <% layout('layouts/boilerplate')%>
 <div class="plant__index">
   <h1>All Plants</h1>
-  <div class="row d-flex justify-content-center">
+  <div class="row d-flex justify-content-center mb-4">
     <% for (let plant of plants){%>
-    <div class="card text-center mx-2" style="width: 15rem">
+    <div class="card text-center mx-2 my-2" style="width: 15rem">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <img src="<%=plant.image%>" class="img-fluid card-img" />
         <a href="/plants/<%=plant._id%>"> </a>
