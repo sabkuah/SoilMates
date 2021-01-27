@@ -11,6 +11,15 @@
         <p>PetFriendly? <%= plant.isPetFriendly %></p>
         <p>Find at:: <%= plant.stores %></p>
       </div>
+      <div class="row d-flex justify-content-center">
+        <a href="/plants/<%= plant._id %>/edit">
+          <button class="btn btn-info">Edit</button>
+        </a>
+
+        <form action="/plants/<%= plant._id %>/delete?_method=DELETE">
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
     </div>
     <div class="col-5 d-flex justify-content-center">
       <img src="<%= plant.image %>" class="img-fluid" alt="<%= plant.name %>" />

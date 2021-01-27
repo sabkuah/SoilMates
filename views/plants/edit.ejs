@@ -1,16 +1,16 @@
 <% layout('layouts/boilerplate')%>
 
   <div class="plant__new container">
-    <h1>Add A New Plant</h1>
-    <form action="/plants/new" method="POST">
+    <h1>Edit Plant</h1>
+    <form action="/plants/<%= plant._id %>?_method=PUT" method="POST">
       <div class="row">
         <div class="col">
           <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" id="name" />
+          <input type="text" class="form-control" name="name" id="name" value="<%= plant.name %>"/>
         </div>
         <div class="col">
           <label for="image">Image URL</label>
-          <input type="text" class="form-control" id="image" name="image"/>
+          <input type="text" class="form-control" id="image" name="image" value="<%= plant.image %>"/>
         </div>
       </div>
 
@@ -20,7 +20,8 @@
             <label for="type">Type 🌱</label>
             <select class="form-control" id="type" name="type">
               <% for( let type of formSelects.plantTypes) { %>
-              <option value="<%= type %>"><%= type %></option>
+              <option value="<%= type %>" <%=plant.type === type ? 'selected' : ""%>>
+        <%= type %></option>
               <% } %>
             </select>
           </div>
@@ -30,7 +31,7 @@
             <label for="water">Water Needs💧</label>
             <select class="form-control" id="water" name="water">
               <% for( let need of formSelects.waterNeeds) { %>
-              <option value="<%= need %>"><%= need %></option>
+              <option value="<%= need %>" <%=plant.water === need ? 'selected' : ""%> ><%= need %></option>
               <% } %>
             </select>
           </div>
@@ -40,7 +41,7 @@
             <label for="light">Light Needs 🔆 </label>
             <select class="form-control" id="light">
               <% for( let need of formSelects.lightNeeds) { %>
-              <option value="<%= need %>"><%= need %></option>
+              <option value="<%= need %>" <%=plant.light === need ? 'selected' : ""%>><%= need %></option>
               <% } %>
             </select>
           </div>
@@ -49,6 +50,7 @@
             Pet Friendly? 🐕
             <div>
                 <div class="form-check form-check-inline">
+                    <!-- Not sure how to pull boolean value into edit form -->
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -74,7 +76,7 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
+        <textarea class="form-control" id="description" rows="3" name="description"><%= plant.description %></textarea>
       </div>
 
       <button class="btn btn-success">Submit</button>
