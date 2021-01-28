@@ -5,6 +5,9 @@ const ejsmate = require("ejs-mate");
 const Plant = require("./models/plant");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const catchAsync = require("./utils/catchAsync");
+const ExpressError = require("./utils/ExpressError");
+const { plantSchema } = require("./models/schemas");
 
 //========================
 //   CONNECT DATABASE
@@ -32,6 +35,17 @@ app.use(express.static(path.join(__dirname, "public"))); //for stylesheets
 app.use(express.urlencoded({ extended: true })); //for req body
 app.use(methodOverride("_method")); //for form PUT, DEL requests
 
+const validatePlant = (req, res, next) => {
+  console.log(req.body);
+  const { error } = plantSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
 //========================
 //       ROUTES
 //========================
@@ -48,49 +62,70 @@ app.get("/", (req, res) => {
 });
 
 //  Get All
-app.get("/plants", async (req, res) => {
-  const plants = await Plant.find({});
-  res.render("plants/index", { plants });
-});
+app.get(
+  "/plants",
+  catchAsync(async (req, res) => {
+    const plants = await Plant.find({});
+    res.render("plants/index", { plants });
+  })
+);
 
 //  Create New Plant
 app.get("/plants/new", (req, res) => {
   res.render("plants/new", { formSelects });
 });
 
-app.post("/plants/new", async (req, res) => {
-  const newPlant = new Plant(req.body);
-  await newPlant.save();
-  console.log("New Plant added>>", newPlant);
-  res.redirect("/plants");
-});
+app.post(
+  "/plants/new",
+  validatePlant,
+  catchAsync(async (req, res, next) => {
+    const newPlant = new Plant(req.body);
+    //console.log("new plant>>>>>>", newPlant);
+    await newPlant.save();
+    console.log("New Plant added>>", newPlant);
+    res.redirect("/plants");
+  })
+);
 
 //Show Plant Details
-app.get("/plants/:id", async (req, res) => {
-  const plant = await Plant.findById(req.params.id);
-  res.render("plants/show", { plant });
-});
+app.get(
+  "/plants/:id",
+  catchAsync(async (req, res) => {
+    const plant = await Plant.findById(req.params.id);
+    res.render("plants/show", { plant });
+  })
+);
 
 //  Edit Plant
-app.get("/plants/:id/edit", async (req, res) => {
-  const plant = await Plant.findById(req.params.id);
-  res.render("plants/edit", { plant, formSelects });
-});
+app.get(
+  "/plants/:id/edit",
+  catchAsync(async (req, res) => {
+    const plant = await Plant.findById(req.params.id);
+    res.render("plants/edit", { plant, formSelects });
+  })
+);
 
-app.put("/plants/:id", async (req, res) => {
-  const { id } = req.params;
-  const plant = await Plant.findByIdAndUpdate(id, { ...req.body });
-  console.log("Plant updated>>", plant);
-  res.redirect(`/plants/${plant._id}`);
-});
+app.put(
+  "/plants/:id",
+  validatePlant,
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const plant = await Plant.findByIdAndUpdate(id, { ...req.body });
+    console.log("Plant updated>>", plant);
+    res.redirect(`/plants/${plant._id}`);
+  })
+);
 
 //  Delete Plant
-app.delete("/plants/:id", async (req, res) => {
-  const { id } = req.params;
-  const plant = await Plant.findByIdAndDelete(id);
-  console.log("Plant deleted>>", plant);
-  res.redirect("/plants");
-});
+app.delete(
+  "/plants/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const plant = await Plant.findByIdAndDelete(id);
+    console.log("Plant deleted>>", plant);
+    res.redirect("/plants");
+  })
+);
 
 app.listen(5000, () => {
   console.log("App running on Port 5000...");

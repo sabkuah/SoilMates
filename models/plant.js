@@ -4,11 +4,9 @@ const Schema = mongoose.Schema;
 const PlantSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Plant must have a name!"],
   },
   image: {
     type: String,
-    required: true,
   },
   type: {
     type: String,
@@ -27,7 +25,6 @@ const PlantSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   isPetFriendly: Boolean,
   stores: [
