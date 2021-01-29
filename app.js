@@ -17,7 +17,7 @@ const dotEnv = require("dotenv");
 
 dotEnv.config();
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/soil-mates";
+const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
