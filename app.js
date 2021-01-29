@@ -16,8 +16,8 @@ const dotEnv = require("dotenv");
 //========================
 
 dotEnv.config();
-
 const dbUrl = process.env.DB_URL;
+
 mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -226,7 +226,6 @@ app.delete(
   "/stores/:storeId",
   catchAsync(async (req, res) => {
     const { storeId } = req.params;
-
     const store = await Store.findByIdAndDelete(storeId);
     console.log("Store deleted>>", store);
     res.redirect("/stores");
