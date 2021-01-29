@@ -3,7 +3,7 @@
 
 <div class="store__show">
   <div class="row d-flex justify-content-center">
-    <div class="card store__show-card col-5">
+    <div class="card store__show-card col-5 offset-1">
       <h1 class="text-center"><%= store.name %></h1>
       <div class="store__show-details card-body">
         <p>City: <%= store.city %></p>
@@ -22,7 +22,7 @@
     </div>
     <div class="col-5 d-flex justify-content-center">
       <img
-        src="<%= store.image %>"
+        src="/store.jpg"
         class="img-fluid store__show-img"
         alt="<%= store.name %>"
       />
@@ -32,7 +32,7 @@
   <div class="store__show-products col-10 offset-1 mt-3 py-2">
     <h1>Current Products</h1>
     <div class="row d-flex justify-content-center mb-4">
-      <% if (store.plants > 0){ %>
+      <% if (store.plants[0]){ %>
       <a href="/stores/<%= store._id %>/plants/new">
         <button class="btn btn-success mx-2">Add Product</button>
       </a>

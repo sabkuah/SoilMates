@@ -10,15 +10,26 @@
         <p>Light Needs: <%= plant.light %></p>
         <p>Description: <%= plant.description %></p>
         <p>PetFriendly? <%= plant.isPetFriendly %></p>
-        <p>Find at: <%= plant.store %></p>
+        <% if (plant.store){ %>
+        <p>
+          Find at:
+          <a href="/stores/<%= plant.store._id %>"><%= plant.store.name %></a>
+        </p>
+        <% } %>
       </div>
       <div class="plant__show-buttons">
         <a href="/plants/<%= plant._id %>/edit">
           <button class="btn btn-info mx-2">Edit</button>
         </a>
-        <form action="/plants/<%= plant._id %>?_method=DELETE" method="POST">
+        <% if (plant.store){ %>
+        <form
+          action="/stores/<%= plant.store.id %>/plants/<%= plant._id %>?_method=DELETE"
+          method="POST"
+        >
           <button class="btn btn-danger mx-2">Delete</button>
         </form>
+
+        <% } %>
       </div>
     </div>
     <div class="col-5 d-flex justify-content-center">

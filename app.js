@@ -108,7 +108,7 @@ app.post(
     const store = await Store.findById(storeId);
     const newPlant = new Plant(req.body);
     store.plants.push(newPlant);
-    newPlant.stores.push(store);
+    newPlant.store = store;
     await newPlant.save();
     await store.save();
     console.log("New Plant added>>>", newPlant);
@@ -121,7 +121,7 @@ app.post(
 app.get(
   "/plants/:id",
   catchAsync(async (req, res) => {
-    const plant = await Plant.findById(req.params.id).populate("stores");
+    const plant = await Plant.findById(req.params.id).populate("store");
     res.render("plants/show", { plant });
   })
 );
@@ -148,12 +148,13 @@ app.put(
 
 //  Delete Plant
 app.delete(
-  "/plants/:id",
+  "/stores/:storeId/plants/:plantId",
   catchAsync(async (req, res) => {
-    const { id } = req.params;
+    const { storeId, plantId } = req.params;
+    await Store.findByIdAndUpdate(id, { $pull: { plants: plantId } });
     const plant = await Plant.findByIdAndDelete(id);
     console.log("Plant deleted>>", plant);
-    res.redirect("/plants");
+    res.redirect(`/stores/${storeId}`);
   })
 );
 
@@ -206,7 +207,7 @@ app.get(
 
 app.put(
   "/stores/:id",
-  validatePlant,
+  validateStore,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const store = await Store.findByIdAndUpdate(id, { ...req.body });
@@ -217,7 +218,7 @@ app.put(
 
 //  Delete Store
 app.delete(
-  "/stores/:id",
+  "/stores/:storeId/plants/:plantId",
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const store = await Store.findByIdAndDelete(id);
@@ -225,6 +226,18 @@ app.delete(
     res.redirect("/stores");
   })
 );
+
+app.all("*", (req, res, next) => {
+  res.send("404!!!");
+});
+
+// //Errpr Handling middleware --> gets called in next() if code enters the catch block
+
+// app.use((err, req, res, next) => {
+//   const { statusCode = 500 } = err;
+//   if (!err.message) err.message = "Oh no, something went wrong!";
+//   res.status(statusCode).render("error", { err });
+// });
 
 app.listen(5000, () => {
   console.log("App running on Port 5000...");

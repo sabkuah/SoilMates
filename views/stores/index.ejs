@@ -1,10 +1,10 @@
 <% layout('layouts/boilerplate')%>
 <div class="snakeplant-bg"></div>
 <div class="store__index">
-  <h1>List of Stores:</h1>
+  <h1 class="store__index-title mb-2">List of Stores:</h1>
   <div class="row d-flex justify-content-center mb-4">
     <% for (let store of stores){%>
-    <div class="card store__index-card text-center">
+    <div class="card store__index-card text-center col-4 mt-2">
       <!-- <a href="/stores/<%=store._id%>">
         <img src="" class="img-fluid
         store__index-img" />

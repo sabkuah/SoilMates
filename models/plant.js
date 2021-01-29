@@ -27,12 +27,10 @@ const PlantSchema = new Schema({
     type: String,
   },
   isPetFriendly: Boolean,
-  stores: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Store",
-    },
-  ],
+  store: {
+    type: Schema.Types.ObjectId,
+    ref: "Store",
+  },
 });
 
 const Plant = mongoose.model("Plant", PlantSchema);
