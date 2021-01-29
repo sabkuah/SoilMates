@@ -1,2 +1,47 @@
 <% layout('layouts/boilerplate')%>
 <div class="snakeplant-bg"></div>
+
+<div class="store__new">
+  <h1>Add A New Store</h1>
+  <form action="/stores/new" method="POST" novalidate class="needs-validation">
+    <div class="row mb-3">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name" required />
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+        />
+      </div>
+      <div class="col">
+        <label for="city">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        name="description"
+      ></textarea>
+    </div>
+
+    <button class="btn btn-success">Submit</button>
+  </form>
+</div>

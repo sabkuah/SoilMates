@@ -7,7 +7,6 @@ const storeSchema = new Schema({
   city: String,
   email: String,
   description: String,
-  image: String,
   plants: [
     {
       type: Schema.Types.ObjectId,

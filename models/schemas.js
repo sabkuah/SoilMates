@@ -15,5 +15,4 @@ module.exports.storeSchema = Joi.object({
   city: Joi.string().lowercase().required(),
   email: Joi.string().email().required(),
   description: Joi.string(),
-  image: Joi.string().uri(),
 });

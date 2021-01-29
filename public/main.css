@@ -5,7 +5,8 @@ footer {
 }
 
 .plant__index,
-.plant__new {
+.plant__new,
+.store__new {
   position: absolute;
   top: 10%;
   text-align: center;
@@ -94,7 +95,8 @@ footer {
 }
 
 /* Plant New */
-.plant__new {
+.plant__new,
+.store__new {
   width: 50%;
   background-color: white;
   padding: 5%;
@@ -105,6 +107,14 @@ footer {
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+/* =========================================== */
+/*                STORES                       */
+/* =========================================== */
+
+.store__new {
+  width: 80% !important;
+  opacity: 98% !important;
+}
 /* Parallax Settings */
 
 .cactus-bg {

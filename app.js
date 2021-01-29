@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
-const { plantSchema } = require("./models/schemas");
+const { plantSchema, storeSchema } = require("./models/schemas");
 
 //========================
 //   CONNECT DATABASE
@@ -166,7 +166,7 @@ app.post(
   validateStore,
   catchAsync(async (req, res, next) => {
     const newStore = new Store(req.body);
-    //await newStore.save();
+    await newStore.save();
     console.log("New Store added>>", newStore);
     res.redirect("/stores");
   })
