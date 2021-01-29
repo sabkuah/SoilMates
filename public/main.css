@@ -9,7 +9,7 @@ main {
 }
 /* Parallax Settings */
 
-.parallax-bg {
+.cactus-bg {
   background-image: url("cacti-bg.jpg");
   height: 100vh;
   background-attachment: fixed;
@@ -18,13 +18,43 @@ main {
   background-size: cover;
 }
 
+.snakeplant-bg {
+  background-image: url("snakeplant-bg.png");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 70%;
+}
+
+.eucalyptus-bg {
+  background-image: url("ecalyptus-bg.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 100%;
+}
+
+.leaves-bg {
+  background-image: url("leaves-bg.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 90%;
+}
+
 .plant__index,
 .plant__new {
   position: absolute;
-  left: 0;
   top: 10%;
-  width: 100%;
   text-align: center;
+  width: 80%;
+  left: 10%;
 }
 
 /* body {
@@ -40,23 +70,70 @@ main {
   color: #000;
 }
 
-.card-img {
-  max-width: 300px;
-  max-height: 300px;
-}
-
 .footer__text {
   font-size: 70%;
 }
 /* Plant Index */
 
-.card {
-  opacity: 0.85;
+.plant__index-card:hover .plant__index-card-overlay {
+  opacity: 100%;
 }
+
+.plant__index-card:hover {
+  background-color: #fafafa;
+  opacity: 95%;
+}
+
+.plant__index-card {
+  width: 15rem;
+  margin: 2%;
+  opacity: 90%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: relative;
+}
+
+.plant__index-card-overlay {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  transition: 0.3s ease;
+  opacity: 0;
+}
+
+.plant__index-img {
+  height: 200px;
+  margin: 5%;
+}
+
 /* Plant Show */
 .plant__show {
   position: absolute;
   left: 0;
-  top: 10%;
+  top: 25%;
   width: 100%;
+}
+
+.plant__show-card {
+  opacity: 95%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.plant__show-buttons {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2%;
+}
+
+.plant__show-img {
+  max-height: 50vh;
+  background-color: white;
+  padding: 5%;
+  border-radius: 7%;
+  opacity: 92%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+/* Plant New */
+.plant__new {
+  width: 50%;
 }

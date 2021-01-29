@@ -39,7 +39,7 @@
         <div class="col">
           <div class="form-group">
             <label for="light">Light Needs 🔆 </label>
-            <select class="form-control" id="light" required>
+            <select class="form-control" id="light" name="light" required>
               <% for( let need of formSelects.lightNeeds) { %>
               <option value="<%= need %>" <%=plant.light === need ? 'selected' : ""%>><%= need %></option>
               <% } %>

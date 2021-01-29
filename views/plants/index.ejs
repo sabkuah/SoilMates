@@ -1,19 +1,23 @@
 <% layout('layouts/boilerplate')%>
+<div class="cactus-bg"></div>
 <div class="plant__index">
   <h1>All Plants</h1>
   <div class="row d-flex justify-content-center mb-4">
     <% for (let plant of plants){%>
-    <div class="card text-center mx-2 my-2" style="width: 15rem">
-      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-        <img src="<%=plant.image%>" class="img-fluid card-img" />
-        <a href="/plants/<%=plant._id%>"> </a>
-      </div>
+    <div class="card plant__index-card text-center">
+      <a href="/plants/<%=plant._id%>">
+        <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
+      </a>
+
       <div class="card-body">
         <h5 class="card-title"><%= plant.name %></h5>
-        <p class="card-text"><%= plant.description%></p>
-        <a href="/plants/<%=plant._id%>" class="btn btn-primary">View</a>
+        <!-- <p class="card-text"><%= plant.description%></p> -->
+      </div>
+      <div class="plant__index-card-overlay">
+        <a href="/plants/<%=plant._id%>"><button>View</button></a>
       </div>
     </div>
     <% }%>
   </div>
 </div>
+<div class="cactus-bg"></div>

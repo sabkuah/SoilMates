@@ -1,7 +1,8 @@
 <% layout('layouts/boilerplate')%>
+<div class="eucalyptus-bg"></div>
 <div class="plant__show">
   <div class="row d-flex justify-content-center">
-    <div class="card col-5">
+    <div class="card plant__show-card col-5">
       <h3><%= plant.name %></h3>
       <div class="plant__show-details card-body">
         <p>Type: <%= plant.type %></p>
@@ -11,18 +12,21 @@
         <p>PetFriendly? <%= plant.isPetFriendly %></p>
         <p>Find at:: <%= plant.stores %></p>
       </div>
-      <div class="row d-flex justify-content-center">
+      <div class="plant__show-buttons">
         <a href="/plants/<%= plant._id %>/edit">
-          <button class="btn btn-info">Edit</button>
+          <button class="btn btn-info mx-2">Edit</button>
         </a>
-
         <form action="/plants/<%= plant._id %>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-danger mx-2">Delete</button>
         </form>
       </div>
     </div>
     <div class="col-5 d-flex justify-content-center">
-      <img src="<%= plant.image %>" class="img-fluid" alt="<%= plant.name %>" />
+      <img
+        src="<%= plant.image %>"
+        class="img-fluid plant__show-img"
+        alt="<%= plant.name %>"
+      />
     </div>
   </div>
 </div>
