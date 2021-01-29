@@ -2,7 +2,14 @@
 <div class="cactus-bg"></div>
 <div class="plant__new">
   <h1>Add A New Plant</h1>
-  <form action="/plants/new" method="POST" novalidate class="needs-validation">
+  <h2><%= store.name %></h2>
+
+  <form
+    action="/stores/<%= store._id %>/plants/new"
+    method="POST"
+    novalidate
+    class="needs-validation"
+  >
     <div class="row mb-3">
       <div class="col">
         <label for="name">Name</label>

@@ -87,19 +87,33 @@ app.get(
 );
 
 //  Create New Plant
-app.get("/plants/new", (req, res) => {
-  res.render("plants/new", { formSelects });
-});
+// app.get("/plants/new", (req, res) => {
+//   res.render("plants/new", { formSelects });
+// });
+
+//Add A Plant to a Store
+app.get(
+  "/stores/:storeId/plants/new",
+  catchAsync(async (req, res) => {
+    const store = await Store.findById(req.params.storeId);
+    res.render("plants/new", { formSelects, store });
+  })
+);
 
 app.post(
-  "/plants/new",
+  "/stores/:storeId/plants/new",
   validatePlant,
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
+    const { storeId } = req.params;
+    const store = await Store.findById(storeId);
     const newPlant = new Plant(req.body);
-    //console.log("new plant>>>>>>", newPlant);
+    store.plants.push(newPlant);
+    newPlant.stores.push(store);
     await newPlant.save();
-    console.log("New Plant added>>", newPlant);
-    res.redirect("/plants");
+    await store.save();
+    console.log("New Plant added>>>", newPlant);
+    console.log("Store Updated>>>", store);
+    res.redirect(`/stores/${store._id}`);
   })
 );
 
@@ -107,7 +121,7 @@ app.post(
 app.get(
   "/plants/:id",
   catchAsync(async (req, res) => {
-    const plant = await Plant.findById(req.params.id);
+    const plant = await Plant.findById(req.params.id).populate("stores");
     res.render("plants/show", { plant });
   })
 );
@@ -172,15 +186,11 @@ app.post(
   })
 );
 
-app.listen(5000, () => {
-  console.log("App running on Port 5000...");
-});
-
 //Show Store Details
 app.get(
   "/stores/:id",
   catchAsync(async (req, res) => {
-    const store = await Store.findById(req.params.id);
+    const store = await Store.findById(req.params.id).populate("plants");
     res.render("stores/show", { store });
   })
 );
@@ -205,7 +215,7 @@ app.put(
   })
 );
 
-//  Delete Plant
+//  Delete Store
 app.delete(
   "/stores/:id",
   catchAsync(async (req, res) => {
@@ -215,3 +225,7 @@ app.delete(
     res.redirect("/stores");
   })
 );
+
+app.listen(5000, () => {
+  console.log("App running on Port 5000...");
+});

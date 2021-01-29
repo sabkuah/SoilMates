@@ -1,2 +1,60 @@
 <% layout('layouts/boilerplate')%>
 <div class="snakeplant-bg"></div>
+
+<div class="store__show">
+  <div class="row d-flex justify-content-center">
+    <div class="card store__show-card col-5">
+      <h1 class="text-center"><%= store.name %></h1>
+      <div class="store__show-details card-body">
+        <p>City: <%= store.city %></p>
+        <p>Email: <%= store.email %></p>
+        <p>Description: <%= store.description %></p>
+      </div>
+      <div class="store__show-buttons">
+        <a href="/stores/<%= store._id %>/edit">
+          <button class="btn btn-info mx-2">Edit</button>
+        </a>
+
+        <form action="/stores/<%= store._id %>?_method=DELETE" method="POST">
+          <button class="btn btn-danger mx-2">Delete</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-5 d-flex justify-content-center">
+      <img
+        src="<%= store.image %>"
+        class="img-fluid store__show-img"
+        alt="<%= store.name %>"
+      />
+    </div>
+  </div>
+
+  <div class="store__show-products col-10 offset-1 mt-3 py-2">
+    <h1>Current Products</h1>
+    <div class="row d-flex justify-content-center mb-4">
+      <% if (store.plants > 0){ %>
+      <a href="/stores/<%= store._id %>/plants/new">
+        <button class="btn btn-success mx-2">Add Product</button>
+      </a>
+      <% for (let plant of store.plants){%>
+      <div class="card plant__index-card text-center">
+        <a href="/plants/<%=plant._id%>">
+          <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
+        </a>
+
+        <div class="card-body">
+          <h5 class="card-title"><%= plant.name %></h5>
+        </div>
+        <div class="plant__index-card-overlay">
+          <a href="/plants/<%=plant._id%>"><button>View</button></a>
+        </div>
+      </div>
+      <% }} else {%>
+      <p>Oops! No plants currently in stock, check back soon!</p>
+      <a href="/stores/<%= store._id %>/plants/new">
+        <button class="btn btn-success mx-2">Add Product</button>
+      </a>
+      <% } %>
+    </div>
+  </div>
+</div>
