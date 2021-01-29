@@ -4,50 +4,6 @@ footer {
   font-family: "Poiret One", cursive;
 }
 
-main {
-  padding-bottom: 5%;
-}
-/* Parallax Settings */
-
-.cactus-bg {
-  background-image: url("cacti-bg.jpg");
-  height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.snakeplant-bg {
-  background-image: url("snakeplant-bg.png");
-  height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 70%;
-}
-
-.eucalyptus-bg {
-  background-image: url("ecalyptus-bg.jpg");
-  height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 100%;
-}
-
-.leaves-bg {
-  background-image: url("leaves-bg.jpg");
-  height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 90%;
-}
-
 .plant__index,
 .plant__new {
   position: absolute;
@@ -57,17 +13,20 @@ main {
   left: 10%;
 }
 
-/* body {
-  background-color: #fafafa;
-} */
+/* Home */
 
 .home__text {
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 45%;
   width: 100%;
   text-align: center;
   color: #000;
+}
+
+.home__nav a {
+  padding: 1%;
+  text-decoration: none;
 }
 
 .footer__text {
@@ -126,6 +85,7 @@ main {
 
 .plant__show-img {
   max-height: 50vh;
+  min-width: 10vw;
   background-color: white;
   padding: 5%;
   border-radius: 7%;
@@ -136,4 +96,52 @@ main {
 /* Plant New */
 .plant__new {
   width: 50%;
+  background-color: white;
+  padding: 5%;
+  margin-top: 2%;
+  border-radius: 3%;
+  opacity: 80%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* Parallax Settings */
+
+.cactus-bg {
+  background-image: url("cacti-bg.jpg");
+  height: calc(100vh - 56px);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.snakeplant-bg {
+  background-image: url("snakeplant-bg.png");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 70%;
+}
+
+.eucalyptus-bg {
+  background-image: url("ecalyptus-bg.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 100%;
+}
+
+.leaves-bg {
+  background-image: url("leaves-bg.jpg");
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 90%;
 }
