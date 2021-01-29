@@ -13,7 +13,9 @@ const { plantSchema, storeSchema } = require("./models/schemas");
 //========================
 //   CONNECT DATABASE
 //========================
-mongoose.connect("mongodb://localhost:27017/soil-mates", {
+
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/soil-mates";
+mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
