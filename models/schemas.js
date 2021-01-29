@@ -9,3 +9,11 @@ module.exports.plantSchema = Joi.object({
   isPetFriendly: Joi.boolean(),
   description: Joi.string().required(),
 });
+
+module.exports.storeSchema = Joi.object({
+  name: Joi.string().lowercase().required(),
+  city: Joi.string().lowercase().required(),
+  email: Joi.string().email().required(),
+  description: Joi.string(),
+  image: Joi.string().uri(),
+});

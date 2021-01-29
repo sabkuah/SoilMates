@@ -14,6 +14,8 @@ const inventorySchema = new Schema({
       ref: "Plant",
     },
   ],
+  price: Number,
+  inStock: Number,
 });
 
 const Inventory = mongoose.model("Inventory", inventorySchema);

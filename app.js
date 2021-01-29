@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const ejsmate = require("ejs-mate");
 const Plant = require("./models/plant");
+const Store = require("./models/store");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const catchAsync = require("./utils/catchAsync");
@@ -46,6 +47,17 @@ const validatePlant = (req, res, next) => {
   }
 };
 
+const validateStore = (req, res, next) => {
+  console.log(req.body);
+  const { error } = storeSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
 //========================
 //       ROUTES
 //========================
@@ -60,6 +72,10 @@ const formSelects = {
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+//========================
+//     PLANT ROUTES
+//========================
 
 //  Get All
 app.get(
@@ -127,6 +143,75 @@ app.delete(
   })
 );
 
+//========================
+//     STORE ROUTES
+//========================
+
+//  Get All
+app.get(
+  "/stores",
+  catchAsync(async (req, res) => {
+    const stores = await Store.find({});
+    res.render("stores/index", { stores });
+  })
+);
+
+//  Create New Store
+app.get("/stores/new", (req, res) => {
+  res.render("stores/new");
+});
+
+app.post(
+  "/stores/new",
+  validateStore,
+  catchAsync(async (req, res, next) => {
+    const newStore = new Store(req.body);
+    //await newStore.save();
+    console.log("New Store added>>", newStore);
+    res.redirect("/stores");
+  })
+);
+
 app.listen(5000, () => {
   console.log("App running on Port 5000...");
 });
+
+//Show Store Details
+app.get(
+  "/stores/:id",
+  catchAsync(async (req, res) => {
+    const store = await Store.findById(req.params.id);
+    res.render("stores/show", { store });
+  })
+);
+
+//  Edit Store
+app.get(
+  "/stores/:id/edit",
+  catchAsync(async (req, res) => {
+    const store = await Store.findById(req.params.id);
+    res.render("stores/edit", { store });
+  })
+);
+
+app.put(
+  "/stores/:id",
+  validatePlant,
+  catchAsync(async (req, res, next) => {
+    const { id } = req.params;
+    const store = await Store.findByIdAndUpdate(id, { ...req.body });
+    console.log("Store updated>>", store);
+    res.redirect(`/stores/${store._id}`);
+  })
+);
+
+//  Delete Plant
+app.delete(
+  "/stores/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const store = await Store.findByIdAndDelete(id);
+    console.log("Store deleted>>", store);
+    res.redirect("/stores");
+  })
+);

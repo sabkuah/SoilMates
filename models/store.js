@@ -3,16 +3,11 @@ const Plant = require("./plant");
 const Schema = mongoose.Schema;
 
 const storeSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Store must have a name!"],
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  image: String,
+  name: String,
+  city: String,
+  email: String,
   description: String,
+  image: String,
   plants: [
     {
       type: Schema.Types.ObjectId,
