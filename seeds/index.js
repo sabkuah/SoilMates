@@ -5,11 +5,20 @@ const Plant = require("../models/plant");
 const plants = require("./plants");
 
 //Connect Database
-mongoose.connect("mongodb://localhost:27017/soil-mates", {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+// mongoose.connect("mongodb://localhost:27017/soil-mates", {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+// });
+
+mongoose.connect(
+  "mongodb+srv://sabkuah:Helloitsme2020!@cluster0.dscvz.mongodb.net/soil-mates?retryWrites=true&w=majority",
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  }
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
@@ -25,6 +34,14 @@ const seedPlants = async () => {
     await newPlant.save();
   }
 };
+
+// const seedStores = async () => {
+//   await Store.deleteMany({});
+//   for (let i = 0; i < stores.length; i++) {
+//     const newStore = new Store(stores[i]);
+//     await newStore.save();
+//   }
+// };
 
 // name: plants[i].name,
 // image: plants[i].name,

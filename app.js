@@ -157,7 +157,7 @@ app.delete(
   catchAsync(async (req, res) => {
     const { storeId, plantId } = req.params;
     await Store.findByIdAndUpdate(id, { $pull: { plants: plantId } });
-    const plant = await Plant.findByIdAndDelete(id);
+    const plant = await Plant.findByIdAndDelete(plantId);
     console.log("Plant deleted>>", plant);
     res.redirect(`/stores/${storeId}`);
   })
@@ -223,7 +223,7 @@ app.put(
 
 //  Delete Store
 app.delete(
-  "/stores/:storeId/plants/:plantId",
+  "/stores/:storeId",
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const store = await Store.findByIdAndDelete(id);
