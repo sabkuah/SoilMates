@@ -1,21 +1,17 @@
 <% layout('layouts/boilerplate')%>
 <div class="snakeplant-bg"></div>
 <div class="store__index">
-  <h1 class="store__index-title mb-2">List of Stores:</h1>
+  <div class="store__index-title mb-2">
+    <h1>List of Stores:</h1>
+    <a href="/stores/new"><button class="btn btn-success">Add Store</button></a>
+  </div>
   <div class="row d-flex justify-content-center mb-4">
     <% for (let store of stores){%>
-    <div class="card store__index-card text-center col-4 mt-2">
-      <!-- <a href="/stores/<%=store._id%>">
-        <img src="" class="img-fluid
-        store__index-img" />
-      </a> -->
-
-      <div class="card-body">
-        <h5 class="card-title"><%= store.name %></h5>
-        <p class="card-text"><%= store.city%></p>
-        <a href="/stores/<%=store._id%>"><button>View</button></a>
-      </div>
-      <% }%>
+    <div class="card store__index-card text-center col-4 m-2 p-3">
+      <h5 class="card-title"><%= store.name %></h5>
+      <p class="card-text"><%= store.city%></p>
+      <a href="/stores/<%=store._id%>"><button>View</button></a>
     </div>
+    <% }%>
   </div>
 </div>
