@@ -4,7 +4,9 @@
   <h1>All Plants</h1>
   <div class="row d-flex justify-content-center mb-4">
     <% for (let plant of plants){%>
-    <div class="card plant__index-card text-center">
+    <div
+      class="card plant__index-card text-center d-flex justify-content-center"
+    >
       <a href="/plants/<%=plant._id%>">
         <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
       </a>

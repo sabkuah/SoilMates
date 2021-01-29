@@ -17,7 +17,7 @@ const storeSchema = new Schema({
 
 storeSchema.post("findOneAndDelete", async function (store) {
   if (store.plants.length) {
-    const res = Plant.deleteMany({ _id: { $in: store.plants } });
+    const res = await Plant.deleteMany({ _id: { $in: store.plants } });
     console.log(res);
   }
 });
