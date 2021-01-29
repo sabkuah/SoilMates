@@ -9,20 +9,20 @@ const methodOverride = require("method-override");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const { plantSchema, storeSchema } = require("./models/schemas");
+const dotEnv = require("dotenv");
 
 //========================
 //   CONNECT DATABASE
 //========================
 
+dotEnv.config();
+
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/soil-mates";
-mongoose.connect(
-  "mongodb+srv://sabkuah:Helloitsme2020!@cluster0.dscvz.mongodb.net/soil-mates?retryWrites=true&w=majority",
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  }
-);
+mongoose.connect(dbUrl, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
@@ -226,11 +226,14 @@ app.delete(
   "/stores/:storeId",
   catchAsync(async (req, res) => {
     const { storeId } = req.params;
+
     const store = await Store.findByIdAndDelete(storeId);
     console.log("Store deleted>>", store);
     res.redirect("/stores");
   })
 );
+
+//db.plant.update({},{ $pull: {store._id:"601387fb735d0321b738b05a"}},{})
 
 app.all("*", (req, res, next) => {
   res.send("404!!!");
