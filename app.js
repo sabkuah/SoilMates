@@ -15,11 +15,14 @@ const { plantSchema, storeSchema } = require("./models/schemas");
 //========================
 
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/soil-mates";
-mongoose.connect(dbUrl, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+mongoose.connect(
+  "mongodb+srv://sabkuah:Helloitsme2020!@cluster0.dscvz.mongodb.net/soil-mates?retryWrites=true&w=majority",
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  }
+);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));
