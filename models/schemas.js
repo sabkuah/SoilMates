@@ -16,3 +16,9 @@ module.exports.storeSchema = Joi.object({
   email: Joi.string().email().required(),
   description: Joi.string(),
 });
+
+module.exports.reviewSchema = Joi.object({
+  body: Joi.string().required(),
+  service: Joi.number().min(1).max(5),
+  selection: Joi.number().min(1).max(5),
+});

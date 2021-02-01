@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Plant = require("./plant");
+const Review = require("./review");
 const Schema = mongoose.Schema;
 
 const storeSchema = new Schema({
@@ -24,6 +25,11 @@ const storeSchema = new Schema({
 storeSchema.post("findOneAndDelete", async function (store) {
   if (store.plants.length) {
     const res = await Plant.deleteMany({ _id: { $in: store.plants } });
+    console.log(res);
+  }
+
+  if (store.reviews.length) {
+    const res = await Review.deleteMany({ _id: { $in: store.reviews } });
     console.log(res);
   }
 });

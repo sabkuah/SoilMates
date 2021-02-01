@@ -2,6 +2,7 @@ nav,
 body,
 footer {
   font-family: "Poiret One", cursive;
+  background-color: #eeeeee;
 }
 
 .plant__index,
@@ -132,7 +133,10 @@ footer {
   top: 15% !important;
 }
 
-.store__show-products {
+.store__show-products,
+.store__show-reviews,
+.store__show-location,
+.store__show-contact {
   background-color: white;
   opacity: 95%;
   text-align: center;

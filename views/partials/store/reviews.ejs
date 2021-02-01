@@ -21,7 +21,7 @@
         <form
           action="/stores/<%= store._id %>/reviews"
           method="POST"
-          class="validated-form"
+          class="needs-validation"
           novalidate
         >
           <label for="selection" class="form-label">Selection</label>
@@ -63,26 +63,31 @@
   </div>
   <!-- List of Reviews  -->
   <div class="col">
-    <% if(store.reviews){ %> <% for(let review of store.reviews){ %>
-    <div class="card mb-2">
-      <div class="row">
+    <% if(store.reviews && store.reviews.length){ %> <% for(let review of
+    store.reviews){ %>
+    <div class="card m-2">
+      <div class="row mb-2">
         <div class="col-2">
           <p>😊</p>
-          <p>AuthorName</p>
+          <p class="text-muted">AuthorName</p>
+          <form
+            action="/stores/<%= store._id %>/reviews/<%= review._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-danger">Delete</button>
+          </form>
         </div>
-        <div class="col-10">
-          <div class="row">
-            <div class="col">
-              Selection: ⭐️⭐️⭐️⭐️ <%= review.selection %>
-            </div>
-            <div class="col">Service:⭐️⭐️⭐️⭐️⭐️ <%= review.service %></div>
+        <div class="col-10 card-body">
+          <div class="row mb-2">
+            <div class="col">Selection: <%= review.selection %></div>
+            <div class="col">Service: <%= review.service %></div>
           </div>
-          <div class="card-body"><%= review.body %></div>
+          <div class="text-start"><%= review.body %></div>
         </div>
       </div>
     </div>
     <% }} else { %>
-    <p>There are no reviews for this store.</p>
+    <p class="text-center">There are no reviews for this store.</p>
     <% } %>
   </div>
 </div>

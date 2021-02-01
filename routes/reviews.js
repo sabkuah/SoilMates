@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const Review = require("../models/review");
 const Store = require("../models/store");
 const catchAsync = require("../utils/catchAsync");
+const { validateReview } = require("../middlewares");
 
 //========================
 //     REVIEW ROUTES
@@ -17,6 +18,7 @@ const catchAsync = require("../utils/catchAsync");
 
 router.post(
   "/",
+  validateReview,
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.storeId);
     const review = new Review(req.body);
@@ -25,7 +27,7 @@ router.post(
     await store.save();
     await review.save();
     req.flash("success", "Added a new review!");
-    res.redirect(`/stores/${store._id}`);
+    res.redirect(`/stores/${store._id}/#reviews`);
   })
 );
 
@@ -34,5 +36,16 @@ router.post(
 //Delete reviews on a store
 //update store when review is deleted
 //========================
+
+router.delete(
+  "/:reviewId",
+  catchAsync(async (req, res) => {
+    const { storeId, reviewId } = req.params;
+    await Store.findByIdAndUpdate(storeId, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    req.flash("success", "Deleted a review!");
+    res.redirect(`/stores/${storeId}/#reviews`);
+  })
+);
 
 module.exports = router;
