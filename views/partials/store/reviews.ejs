@@ -1,21 +1,88 @@
 <div class="store__show-reviews col-10 offset-1 mt-3 py-2">
   <h1 class="text-center">Reviews</h1>
-  <button class="btn btn-success">Add A Review</button>
+  <!-- Add Review Collapsible -->
+  <div class="store__show-addReview">
+    <p>
+      <button
+        class="btn btn-success"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#reviewForm"
+        aria-expanded="false"
+        aria-controls="collapseExample"
+      >
+        Add A Review
+      </button>
+    </p>
+
+    <div class="collapse mb-3" id="reviewForm">
+      <div class="card card-body">
+        <!-- Add Review Form  -->
+        <form
+          action="/stores/<%= store._id %>/reviews"
+          method="POST"
+          class="validated-form"
+          novalidate
+        >
+          <label for="selection" class="form-label">Selection</label>
+          <input
+            type="range"
+            class="form-range"
+            min="1"
+            max="5"
+            step="1.0"
+            id="selection"
+            name="selection"
+          />
+          <label for="service" class="form-label">Service</label>
+          <input
+            type="range"
+            class="form-range"
+            min="1"
+            max="5"
+            step="1.0"
+            id="service"
+            name="service"
+          />
+
+          <div class="form-group mb-3">
+            <label for="body">Review</label>
+            <textarea
+              class="form-control"
+              id="body"
+              rows="2"
+              name="body"
+              required
+            ></textarea>
+          </div>
+
+          <button>Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- List of Reviews  -->
   <div class="col">
-    <div class="card">
+    <% if(store.reviews){ %> <% for(let review of store.reviews){ %>
+    <div class="card mb-2">
       <div class="row">
         <div class="col-2">
           <p>😊</p>
-          <p>name</p>
+          <p>AuthorName</p>
         </div>
         <div class="col-10">
           <div class="row">
-            <div class="col">Selection: ⭐️⭐️⭐️⭐️</div>
-            <div class="col">Service:⭐️⭐️⭐️⭐️⭐️</div>
+            <div class="col">
+              Selection: ⭐️⭐️⭐️⭐️ <%= review.selection %>
+            </div>
+            <div class="col">Service:⭐️⭐️⭐️⭐️⭐️ <%= review.service %></div>
           </div>
-          <div class="card-body">This is some text within a card body.</div>
+          <div class="card-body"><%= review.body %></div>
         </div>
       </div>
     </div>
+    <% }} else { %>
+    <p>There are no reviews for this store.</p>
+    <% } %>
   </div>
 </div>

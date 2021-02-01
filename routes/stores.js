@@ -44,7 +44,9 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    const store = await Store.findById(req.params.id).populate("plants");
+    const store = await Store.findById(req.params.id)
+      .populate("plants")
+      .populate("reviews");
     res.render("stores/show", { store });
   })
 );

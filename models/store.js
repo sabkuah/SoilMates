@@ -13,6 +13,12 @@ const storeSchema = new Schema({
       ref: "Plant",
     },
   ],
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 storeSchema.post("findOneAndDelete", async function (store) {
