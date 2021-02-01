@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Store = require("../models/store");
-const { validateStore } = require("../middlewares");
+const { validateStore, isLoggedIn } = require("../middlewares");
 const catchAsync = require("../utils/catchAsync");
 
 //========================
@@ -22,12 +22,13 @@ router.get(
 //========================
 //       NEW STORE
 //========================
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("stores/new");
 });
 
 router.post(
   "/new",
+  isLoggedIn,
   validateStore,
   catchAsync(async (req, res, next) => {
     const newStore = new Store(req.body);
@@ -56,6 +57,7 @@ router.get(
 //========================
 router.get(
   "/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.id);
     res.render("stores/edit", { store });
@@ -64,6 +66,7 @@ router.get(
 
 router.put(
   "/:id",
+  isLoggedIn,
   validateStore,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -79,6 +82,7 @@ router.put(
 //========================
 router.delete(
   "/:storeId",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { storeId } = req.params;
     const store = await Store.findByIdAndDelete(storeId);

@@ -97,7 +97,7 @@ app.get("/", (req, res) => {
 });
 
 app.all("*", (req, res, next) => {
-  res.send("404!!!");
+  res.render("notFound");
 });
 
 //===========================

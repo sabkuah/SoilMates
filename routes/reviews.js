@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const Review = require("../models/review");
 const Store = require("../models/store");
 const catchAsync = require("../utils/catchAsync");
-const { validateReview } = require("../middlewares");
+const { validateReview, isLoggedIn } = require("../middlewares");
 
 //========================
 //     REVIEW ROUTES
@@ -18,6 +18,7 @@ const { validateReview } = require("../middlewares");
 
 router.post(
   "/",
+  isLoggedIn,
   validateReview,
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.storeId);
@@ -39,6 +40,7 @@ router.post(
 
 router.delete(
   "/:reviewId",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { storeId, reviewId } = req.params;
     await Store.findByIdAndUpdate(storeId, { $pull: { reviews: reviewId } });

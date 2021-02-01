@@ -48,8 +48,8 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "Welcome back to Soil-Mates");
-    const redirectUrl = "/plants";
-    //delete req.session.returnUrl;
+    const redirectUrl = req.session.returnUrl || "/plants";
+    delete req.session.returnUrl;
     res.redirect(redirectUrl);
   }
 );

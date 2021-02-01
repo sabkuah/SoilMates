@@ -1,6 +1,23 @@
 const { plantSchema, storeSchema, reviewSchema } = require("./models/schemas");
 const ExpressError = require("./utils/ExpressError");
 
+//========================
+//     AUTHORIZATION
+//========================
+
+module.exports.isLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    req.session.returnUrl = req.originalUrl;
+    req.flash("error", "You must be signed in to view this page.");
+    return res.redirect("/users/login");
+  }
+  next();
+};
+
+//========================
+//   SCHEMA VALIADATION
+//========================
+
 module.exports.validatePlant = (req, res, next) => {
   console.log(req.body);
   const { error } = plantSchema.validate(req.body);

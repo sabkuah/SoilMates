@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
-const { validatePlant } = require("../middlewares");
+const { validatePlant, isLoggedIn } = require("../middlewares");
 const Plant = require("../models/plant");
 const Store = require("../models/store");
 
@@ -29,6 +29,7 @@ router.get(
 
 router.get(
   "/stores/:storeId/plants/new",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.storeId);
     res.render("plants/new", { formSelects, store });
@@ -37,6 +38,7 @@ router.get(
 
 router.post(
   "/stores/:storeId/plants/new",
+  isLoggedIn,
   validatePlant,
   catchAsync(async (req, res) => {
     const { storeId } = req.params;
@@ -69,6 +71,7 @@ router.get(
 //========================
 router.get(
   "/plants/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const plant = await Plant.findById(req.params.id);
     res.render("plants/edit", { plant, formSelects });
@@ -77,6 +80,7 @@ router.get(
 
 router.put(
   "/plants/:id",
+  isLoggedIn,
   validatePlant,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -92,6 +96,7 @@ router.put(
 //========================
 router.delete(
   "/stores/:storeId/plants/:plantId",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { storeId, plantId } = req.params;
     await Store.findByIdAndUpdate(storeId, { $pull: { plants: plantId } });
