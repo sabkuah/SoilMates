@@ -44,12 +44,12 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureFlash: true,
-    failureRedirect: "/login",
+    failureRedirect: "/users/login",
   }),
   (req, res) => {
     req.flash("success", "Welcome back to Soil-Mates");
-    const redirectUrl = req.session.returnUrl || "/plants";
-    delete req.session.returnUrl;
+    const redirectUrl = "/plants";
+    //delete req.session.returnUrl;
     res.redirect(redirectUrl);
   }
 );
@@ -57,5 +57,11 @@ router.post(
 //========================
 //         LOGOUT
 //========================
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  req.flash("success", "You have been logged out, see you next time!");
+  res.redirect("/plants");
+});
 
 module.exports = router;
