@@ -3,6 +3,7 @@ const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const { validatePlant } = require("../middlewares");
 const Plant = require("../models/plant");
+const Store = require("../models/store");
 
 const formSelects = {
   plantTypes: ["", "plant", "tree", "succulent"],

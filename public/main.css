@@ -142,7 +142,7 @@ footer {
 
 .cactus-bg {
   background-image: url("cacti-bg.jpg");
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -151,7 +151,7 @@ footer {
 
 .snakeplant-bg {
   background-image: url("snakeplant-bg.png");
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -161,7 +161,7 @@ footer {
 
 .eucalyptus-bg {
   background-image: url("ecalyptus-bg.jpg");
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -171,7 +171,7 @@ footer {
 
 .leaves-bg {
   background-image: url("leaves-bg.jpg");
-  height: calc(100vh - 56px);
+  height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

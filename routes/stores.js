@@ -8,7 +8,9 @@ const catchAsync = require("../utils/catchAsync");
 //     STORE ROUTES
 //========================
 
-//  Get All
+//========================
+//       GET ALL
+//========================
 router.get(
   "/",
   catchAsync(async (req, res) => {
@@ -17,7 +19,9 @@ router.get(
   })
 );
 
-//  Create New Store
+//========================
+//     NEW STORE
+//========================
 router.get("/new", (req, res) => {
   res.render("stores/new");
 });
@@ -33,7 +37,9 @@ router.post(
   })
 );
 
-//Show Store Details
+//========================
+//      SHOW STORE
+//========================
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
@@ -42,7 +48,9 @@ router.get(
   })
 );
 
-//  Edit Store
+//========================
+//      EDIT STORE
+//========================
 router.get(
   "/:id/edit",
   catchAsync(async (req, res) => {
@@ -62,7 +70,9 @@ router.put(
   })
 );
 
-//  Delete Store
+//========================
+//     DELETE STORE
+//========================
 router.delete(
   "/:storeId",
   catchAsync(async (req, res) => {
