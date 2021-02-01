@@ -7,6 +7,8 @@ const methodOverride = require("method-override");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const dotEnv = require("dotenv");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const plantRoutes = require("./routes/plants");
 const storeRoutes = require("./routes/stores");
@@ -16,7 +18,8 @@ const storeRoutes = require("./routes/stores");
 //========================
 
 dotEnv.config();
-const dbUrl = process.env.DB_URL;
+//const dbUrl = process.env.DB_URL;
+const dbUrl = "mongodb://localhost:27017/yelp-camp";
 
 mongoose.connect(dbUrl, {
   useUnifiedTopology: true,
@@ -41,6 +44,29 @@ app.engine("ejs", ejsmate); //for partials
 app.use(express.static(path.join(__dirname, "public"))); //for stylesheets
 app.use(express.urlencoded({ extended: true })); //for req body
 app.use(methodOverride("_method")); //for form PUT, DEL requests
+app.use(flash());
+
+//=== Session and Cookies ===//
+const sessionConfig = {
+  secret: "tempsecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //one week
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+
+app.use(session(sessionConfig));
+
+//=== Flash ===//
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+});
 
 //========================
 //       ROUTES

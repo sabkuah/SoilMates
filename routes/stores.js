@@ -20,7 +20,7 @@ router.get(
 );
 
 //========================
-//     NEW STORE
+//       NEW STORE
 //========================
 router.get("/new", (req, res) => {
   res.render("stores/new");
@@ -33,6 +33,7 @@ router.post(
     const newStore = new Store(req.body);
     await newStore.save();
     console.log("New Store added>>", newStore);
+    req.flash("success", "Store added!");
     res.redirect("/stores");
   })
 );
@@ -66,6 +67,7 @@ router.put(
     const { id } = req.params;
     const store = await Store.findByIdAndUpdate(id, { ...req.body });
     console.log("Store updated>>", store);
+    req.flash("success", "Store updated!");
     res.redirect(`/stores/${store._id}`);
   })
 );
@@ -79,6 +81,7 @@ router.delete(
     const { storeId } = req.params;
     const store = await Store.findByIdAndDelete(storeId);
     console.log("Store deleted>>", store);
+    req.flash("success", "Store deleted!");
     res.redirect("/stores");
   })
 );

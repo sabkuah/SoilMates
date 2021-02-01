@@ -1,4 +1,5 @@
 const { plantSchema, storeSchema } = require("./models/schemas");
+const ExpressError = require("./utils/ExpressError");
 
 module.exports.validatePlant = (req, res, next) => {
   console.log(req.body);

@@ -48,6 +48,7 @@ router.post(
     await store.save();
     console.log("New Plant added>>>", newPlant);
     console.log("Store Updated>>>", store);
+    req.flash("success", "Plant added!");
     res.redirect(`/stores/${store._id}`);
   })
 );
@@ -81,6 +82,7 @@ router.put(
     const { id } = req.params;
     const plant = await Plant.findByIdAndUpdate(id, { ...req.body });
     console.log("Plant updated>>", plant);
+    req.flash("success", "Plant updated!");
     res.redirect(`/plants/${plant._id}`);
   })
 );
@@ -95,6 +97,7 @@ router.delete(
     await Store.findByIdAndUpdate(storeId, { $pull: { plants: plantId } });
     const plant = await Plant.findByIdAndDelete(plantId);
     console.log("Plant deleted>>", plant);
+    req.flash("success", "Plant deleted!");
     res.redirect(`/stores/${storeId}`);
   })
 );
