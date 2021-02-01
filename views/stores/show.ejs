@@ -1,8 +1,9 @@
 <% layout('layouts/boilerplate')%>
-<div class="snakeplant-bg"></div>
+<!-- <div class="snakeplant-bg"></div> -->
 
 <div class="store__show">
   <div class="row d-flex justify-content-center">
+    <!-- STORE INFO //LEFT -->
     <div class="card store__show-card col-5 offset-1">
       <h1 class="text-center"><%= store.name %></h1>
       <div class="store__show-details card-body">
@@ -20,6 +21,8 @@
         </form>
       </div>
     </div>
+
+    <!-- STORE IMAGE //RIGHT -->
     <div class="col-5 d-flex justify-content-center">
       <img
         src="/store.jpg"
@@ -29,33 +32,51 @@
     </div>
   </div>
 
-  <div class="store__show-products col-10 offset-1 mt-3 py-2">
-    <h1>Current Products</h1>
-    <div class="row d-flex justify-content-center mb-4">
-      <% if (store.plants[0]){ %>
-      <a href="/stores/<%= store._id %>/plants/new">
-        <button class="btn btn-success mx-2">Add Product</button>
-      </a>
-      <% for (let plant of store.plants){%>
-      <div class="card plant__index-card text-center">
-        <a href="/plants/<%=plant._id%>">
-          <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
-        </a>
+  <!-- NESTED NAV/SCROLLSPY -->
+  <div class="container mt-4">
+    <nav
+      id="store__show-nav"
+      class="navbar navbar-light bg-light d-flex justify-content-center"
+    >
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="#products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#reviews">Reviews</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#location">Location</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
 
-        <div class="card-body">
-          <h5 class="card-title"><%= plant.name %></h5>
-        </div>
-        <div class="plant__index-card-overlay">
-          <a href="/plants/<%=plant._id%>"><button>View</button></a>
-        </div>
+    <!-- <div
+      data-bs-spy="scroll"
+      data-bs-target="#store__show-scrollspy"
+      data-bs-offset="0"
+      tabindex="0"
+    > -->
+    <div>
+      <div id="products"><%- include('../partials/store/products')%></div>
+      <div id="reviews"><%- include('../partials/store/reviews')%></div>
+      <div id="location">
+        Location
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ratione
+          quasi ducimus quis consequatur, sapiente dolorem! Animi ducimus,
+          fugiat, assumenda dolorem quos consectetur officiis ex hic dicta ab
+          corporis corrupti.
+        </p>
       </div>
-      <% }} else {%>
-      <p>Oops! No plants currently in stock, check back soon!</p>
-      <a href="/stores/<%= store._id %>/plants/new">
-        <button class="btn btn-success mx-2">Add Product</button>
-      </a>
-      <% } %>
+      <div id="contact">
+        Contact
+        <p>...</p>
+      </div>
     </div>
   </div>
 </div>
-<div class="snakeplant-bg"></div>
+<!-- <div class="snakeplant-bg"></div> -->

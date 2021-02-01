@@ -1,0 +1,28 @@
+<div class="store__show-products col-10 offset-1 mt-3 py-2">
+  <h1>Current Products</h1>
+  <div class="row d-flex justify-content-center mb-4">
+    <% if (store.plants[0]){ %>
+    <a href="/stores/<%= store._id %>/plants/new">
+      <button class="btn btn-success mx-2">Add Product</button>
+    </a>
+    <% for (let plant of store.plants){%>
+    <div class="card plant__index-card text-center">
+      <a href="/plants/<%=plant._id%>">
+        <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
+      </a>
+
+      <div class="card-body">
+        <h5 class="card-title"><%= plant.name %></h5>
+      </div>
+      <div class="plant__index-card-overlay">
+        <a href="/plants/<%=plant._id%>"><button>View</button></a>
+      </div>
+    </div>
+    <% }} else {%>
+    <p>Oops! No plants currently in stock, check back soon!</p>
+    <a href="/stores/<%= store._id %>/plants/new">
+      <button class="btn btn-success mx-2">Add Product</button>
+    </a>
+    <% } %>
+  </div>
+</div>

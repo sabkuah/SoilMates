@@ -12,6 +12,7 @@ const flash = require("connect-flash");
 
 const plantRoutes = require("./routes/plants");
 const storeRoutes = require("./routes/stores");
+const reviewRoutes = require("./routes/reviews");
 
 //========================
 //   CONNECT DATABASE
@@ -74,6 +75,7 @@ app.use((req, res, next) => {
 
 app.use("/", plantRoutes);
 app.use("/stores", storeRoutes);
+app.use("/stores/:storeId/reviews", reviewRoutes);
 
 // Home Page
 app.get("/", (req, res) => {
