@@ -17,6 +17,7 @@ const User = require("./models/user");
 const plantRoutes = require("./routes/plants");
 const storeRoutes = require("./routes/stores");
 const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/users");
 
 //========================
 //   CONNECT DATABASE
@@ -86,6 +87,7 @@ app.use((req, res, next) => {
 //========================
 
 app.use("/", plantRoutes);
+app.use("/users", userRoutes);
 app.use("/stores", storeRoutes);
 app.use("/stores/:storeId/reviews", reviewRoutes);
 
