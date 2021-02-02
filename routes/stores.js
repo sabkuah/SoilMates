@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Store = require("../models/store");
-const { validateStore, isLoggedIn } = require("../middlewares");
+const { validateStore, isLoggedIn, isShopAuthor } = require("../middlewares");
 const catchAsync = require("../utils/catchAsync");
 
 //========================
@@ -47,7 +47,12 @@ router.get(
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.id)
       .populate("plants")
-      .populate("reviews");
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      });
     res.render("stores/show", { store });
   })
 );
@@ -58,6 +63,7 @@ router.get(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isShopAuthor,
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.id);
     res.render("stores/edit", { store });
@@ -67,6 +73,7 @@ router.get(
 router.put(
   "/:id",
   isLoggedIn,
+  isShopAuthor,
   validateStore,
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
@@ -83,6 +90,7 @@ router.put(
 router.delete(
   "/:storeId",
   isLoggedIn,
+  isShopAuthor,
   catchAsync(async (req, res) => {
     const { storeId } = req.params;
     const store = await Store.findByIdAndDelete(storeId);

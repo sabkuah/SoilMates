@@ -1,5 +1,8 @@
 const { plantSchema, storeSchema, reviewSchema } = require("./models/schemas");
 const ExpressError = require("./utils/ExpressError");
+const Store = require("./models/store");
+const Review = require("./models/review");
+const catchAsync = require("./utils/catchAsync");
 
 //========================
 //     AUTHORIZATION
@@ -13,6 +16,25 @@ module.exports.isLoggedIn = (req, res, next) => {
   }
   next();
 };
+
+module.exports.isShopAuthor = catchAsync(async (req, res, next) => {
+  const { storeId } = req.params;
+  const store = await Store.findById(storeId);
+  if (!store.author.equals(req.user._id)) {
+    req.flash("error", "You do not have permission to edit this store.");
+    return res.redirect(`/stores/${storeId}`);
+  }
+});
+
+module.exports.isReviewAuthor = catchAsync(async (req, res, next) => {
+  const { storeId, reviewId } = req.params;
+  const review = await Review.findById(reviewId);
+  if (!review.author.equals(req.user._id)) {
+    req.flash("error", "You do not have permission to edit this review.");
+    return res.redirect(`/stores/${storeId}`);
+  }
+  next();
+});
 
 //========================
 //   SCHEMA VALIADATION

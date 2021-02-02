@@ -8,6 +8,10 @@ const storeSchema = new Schema({
   city: String,
   email: String,
   description: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   plants: [
     {
       type: Schema.Types.ObjectId,

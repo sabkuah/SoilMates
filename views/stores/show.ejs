@@ -10,7 +10,9 @@
         <p>City: <%= store.city %></p>
         <p>Email: <%= store.email %></p>
         <p>Description: <%= store.description %></p>
+        <p>Store Author: <%= store.author.username %></p>
       </div>
+      <% if(currentUser && store.author.equals(currentUser._id)) %>
       <div class="store__show-buttons">
         <a href="/stores/<%= store._id %>/edit">
           <button class="btn btn-info mx-2">Edit</button>
@@ -20,6 +22,7 @@
           <button class="btn btn-danger mx-2">Delete</button>
         </form>
       </div>
+      <% } %>
     </div>
 
     <!-- STORE IMAGE //RIGHT -->
