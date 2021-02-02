@@ -25,7 +25,7 @@ const userRoutes = require("./routes/users");
 
 dotEnv.config();
 //const dbUrl = process.env.DB_URL;
-const dbUrl = "mongodb://localhost:27017/yelp-camp";
+const dbUrl = "mongodb://localhost:27017/soil-mates";
 
 mongoose.connect(dbUrl, {
   useUnifiedTopology: true,

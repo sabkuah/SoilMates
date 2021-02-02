@@ -32,6 +32,7 @@ router.post(
   validateStore,
   catchAsync(async (req, res, next) => {
     const newStore = new Store(req.body);
+    newStore.author = req.user._id;
     await newStore.save();
     console.log("New Store added>>", newStore);
     req.flash("success", "Store added!");
@@ -46,6 +47,7 @@ router.get(
   "/:id",
   catchAsync(async (req, res) => {
     const store = await Store.findById(req.params.id)
+      .populate("author")
       .populate("plants")
       .populate({
         path: "reviews",

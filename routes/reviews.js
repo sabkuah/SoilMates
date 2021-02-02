@@ -46,7 +46,7 @@ router.post(
 router.delete(
   "/:reviewId",
   isLoggedIn,
-  //isReviewAuthor,
+  isReviewAuthor,
   catchAsync(async (req, res) => {
     const { storeId, reviewId } = req.params;
     await Store.findByIdAndUpdate(storeId, { $pull: { reviews: reviewId } });

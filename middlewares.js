@@ -24,6 +24,7 @@ module.exports.isShopAuthor = catchAsync(async (req, res, next) => {
     req.flash("error", "You do not have permission to edit this store.");
     return res.redirect(`/stores/${storeId}`);
   }
+  next();
 });
 
 module.exports.isReviewAuthor = catchAsync(async (req, res, next) => {

@@ -67,19 +67,19 @@
     store.reviews){ %>
     <div class="card m-2">
       <div class="row mb-2">
-        <div class="col-2">
+        <div class="col-3">
           <p><%= review.author.username %></p>
           <p class="text-muted"><%= review.dateAdded%></p>
-          <% if(currentUser && review.author.equals(currentUser._id)) %>
+          <% if(currentUser && review.author.equals(currentUser._id)){ %>
           <form
             action="/stores/<%= store._id %>/reviews/<%= review._id%>?_method=DELETE"
             method="POST"
           >
             <button class="btn btn-danger">𝗫</button>
           </form>
-          : "" %>
+          <%}%>
         </div>
-        <div class="col-10 card-body">
+        <div class="col-9 card-body">
           <div class="row mb-2">
             <div class="col">Selection: <%= review.selection %></div>
             <div class="col">Service: <%= review.service %></div>
