@@ -8,6 +8,7 @@ const {
   isLoggedIn,
   isReviewAuthor,
 } = require("../middlewares");
+const moment = require("moment");
 
 //========================
 //     REVIEW ROUTES
@@ -28,6 +29,7 @@ router.post(
     const store = await Store.findById(req.params.storeId);
     const review = new Review(req.body);
     review.author = req.user._id;
+    review.dateAdded = moment().format("lll");
     store.reviews.push(review);
     console.log(store);
     await store.save();

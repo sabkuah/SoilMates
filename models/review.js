@@ -11,8 +11,7 @@ const ReviewSchema = new Schema({
     ref: "User",
   },
   dateAdded: {
-    type: Date,
-    default: Date.now,
+    type: String,
   },
 });
 
