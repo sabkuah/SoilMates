@@ -2,7 +2,7 @@
 <div class="cactus-bg"></div>
   <div class="plant__new container">
     <h1>Edit Plant</h1>
-    <form action="/plants/<%= plant._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
+    <form action="/stores/<%= plant.store._id %>/plants/<%= plant._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
       <div class="row mb-3">
         <div class="col">
           <label for="name">Name</label>

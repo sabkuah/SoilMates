@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utils/catchAsync");
 const { validatePlant, isLoggedIn, isShopAuthor } = require("../middlewares");
 const Plant = require("../models/plant");
@@ -11,24 +11,14 @@ const formSelects = {
   lightNeeds: ["", "little", "some", "lots"],
 };
 
-//========================
-//     Get All
-//========================
-
-router.get(
-  "/plants",
-  catchAsync(async (req, res) => {
-    const plants = await Plant.find({});
-    res.render("plants/index", { plants });
-  })
-);
+//app.use("/stores/:storeId/plants", plantRoutes);
 
 //========================
 // Add A Plant to a Store
 //========================
 
 router.get(
-  "/stores/:storeId/plants/new",
+  "/new",
   isLoggedIn,
   isShopAuthor,
   catchAsync(async (req, res) => {
@@ -38,7 +28,7 @@ router.get(
 );
 
 router.post(
-  "/stores/:storeId/plants/new",
+  "/new",
   isLoggedIn,
   isShopAuthor,
   validatePlant,
@@ -61,9 +51,9 @@ router.post(
 //     Show Plant
 //========================
 router.get(
-  "/plants/:id",
+  "/:plantId",
   catchAsync(async (req, res) => {
-    const plant = await Plant.findById(req.params.id).populate("store");
+    const plant = await Plant.findById(req.params.plantId).populate("store");
     res.render("plants/show", { plant });
   })
 );
@@ -72,34 +62,34 @@ router.get(
 //     Edit Plant
 //========================
 router.get(
-  "/plants/:id/edit",
+  "/:plantId/edit",
   isLoggedIn,
   isShopAuthor,
   catchAsync(async (req, res) => {
-    const plant = await Plant.findById(req.params.id);
+    const plant = await Plant.findById(req.params.plantId);
     res.render("plants/edit", { plant, formSelects });
   })
 );
 
 router.put(
-  "/plants/:id",
+  "/:plantId",
   isLoggedIn,
   isShopAuthor,
   validatePlant,
   catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const plant = await Plant.findByIdAndUpdate(id, { ...req.body });
+    const { plantId, storeId } = req.params;
+    const plant = await Plant.findByIdAndUpdate(plantId, { ...req.body });
     console.log("Plant updated>>", plant);
     req.flash("success", "Plant updated!");
-    res.redirect(`/plants/${plant._id}`);
+    res.redirect(`/stores/${storeId}/plants/${plant._id}`);
   })
 );
 
 //========================
 //     Delete Plant
 //========================
-router.delete(
-  "/stores/:storeId/plants/:plantId",
+http: router.delete(
+  "/:plantId",
   isLoggedIn,
   isShopAuthor,
   catchAsync(async (req, res) => {

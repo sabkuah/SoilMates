@@ -9,6 +9,7 @@ const ExpressError = require("./utils/ExpressError");
 const dotEnv = require("dotenv");
 const session = require("express-session");
 const flash = require("connect-flash");
+const Plant = require("./models/plant");
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -18,6 +19,7 @@ const plantRoutes = require("./routes/plants");
 const storeRoutes = require("./routes/stores");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
+const { required } = require("joi");
 
 //========================
 //   CONNECT DATABASE
@@ -86,15 +88,24 @@ app.use((req, res, next) => {
 //       ROUTES
 //========================
 
-app.use("/", plantRoutes);
 app.use("/users", userRoutes);
 app.use("/stores", storeRoutes);
+app.use("/stores/:storeId/plants", plantRoutes);
 app.use("/stores/:storeId/reviews", reviewRoutes);
 
 // Home Page
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+// Plant Index Page
+app.get(
+  "/plants",
+  catchAsync(async (req, res) => {
+    const plants = await Plant.find({});
+    res.render("plants/index", { plants });
+  })
+);
 
 app.all("*", (req, res, next) => {
   res.render("notFound");

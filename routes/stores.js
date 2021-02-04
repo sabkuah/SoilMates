@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const Store = require("../models/store");
 const { validateStore, isLoggedIn, isShopAuthor } = require("../middlewares");
 const catchAsync = require("../utils/catchAsync");
@@ -44,9 +44,9 @@ router.post(
 //      SHOW STORE
 //========================
 router.get(
-  "/:id",
+  "/:storeId",
   catchAsync(async (req, res) => {
-    const store = await Store.findById(req.params.id)
+    const store = await Store.findById(req.params.storeId)
       .populate("author")
       .populate("plants")
       .populate({
@@ -63,23 +63,23 @@ router.get(
 //      EDIT STORE
 //========================
 router.get(
-  "/:id/edit",
+  "/:storeId/edit",
   isLoggedIn,
   isShopAuthor,
   catchAsync(async (req, res) => {
-    const store = await Store.findById(req.params.id);
+    const store = await Store.findById(req.params.storeId);
     res.render("stores/edit", { store });
   })
 );
 
 router.put(
-  "/:id",
+  "/:storeId",
   isLoggedIn,
   isShopAuthor,
   validateStore,
   catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const store = await Store.findByIdAndUpdate(id, { ...req.body });
+    const { storeId } = req.params;
+    const store = await Store.findByIdAndUpdate(storeId, { ...req.body });
     console.log("Store updated>>", store);
     req.flash("success", "Store updated!");
     res.redirect(`/stores/${store._id}`);

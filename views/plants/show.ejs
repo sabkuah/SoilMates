@@ -18,7 +18,7 @@
         <% } %>
       </div>
       <div class="plant__show-buttons">
-        <a href="/plants/<%= plant._id %>/edit">
+        <a href="/stores/<%= plant.store._id %>/plants/<%= plant._id %>/edit">
           <button class="btn btn-info mx-2">Edit</button>
         </a>
         <% if (plant.store){ %>

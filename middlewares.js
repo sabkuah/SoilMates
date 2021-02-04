@@ -20,8 +20,9 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.isShopAuthor = catchAsync(async (req, res, next) => {
   const { storeId } = req.params;
   const store = await Store.findById(storeId);
+  console.log(store);
   if (!store.author.equals(req.user._id)) {
-    req.flash("error", "You do not have permission to edit this store.");
+    req.flash("error", "You do not have permission to edit this item.");
     return res.redirect(`/stores/${storeId}`);
   }
   next();

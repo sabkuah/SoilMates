@@ -7,7 +7,7 @@
     <div
       class="card plant__index-card text-center d-flex justify-content-center"
     >
-      <a href="/plants/<%=plant._id%>">
+      <a href="/stores/<%= plant.store._id %>/plants/<%=plant._id%>">
         <img src="<%=plant.image%>" class="img-fluid plant__index-img" />
       </a>
 
@@ -16,7 +16,9 @@
         <!-- <p class="card-text"><%= plant.description%></p> -->
       </div>
       <div class="plant__index-card-overlay">
-        <a href="/plants/<%=plant._id%>"><button>View</button></a>
+        <a href="/stores/<%= plant.store._id %>/plants/<%=plant._id%>"
+          ><button>View</button></a
+        >
       </div>
     </div>
     <% }%>

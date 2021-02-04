@@ -8,4 +8,4 @@ Jade Plant
 
 https://www.almanac.com/sites/default/files/image_nodes/jade-planting-growing.jpg
 
-Description: With their thick, woody stems and oval-shaped leaves, jade plants have a miniature, tree-like appearance that makes them very appealing for use as a decorative plant.
+With their thick, woody stems and oval-shaped leaves, jade plants have a miniature, tree-like appearance that makes them very appealing for use as a decorative plant.
