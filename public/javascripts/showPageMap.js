@@ -11,9 +11,5 @@ map.addControl(new mapboxgl.NavigationControl());
 
 new mapboxgl.Marker()
   .setLngLat(store.geometry.coordinates)
-  .setPopup(
-    new mapboxgl.Popup({ offset: 25 }).setHTML(
-      `<h5>${store.name}</h5> <p>${store.city}</p>`
-    )
-  )
+  .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<p>${store.name}</p>`))
   .addTo(map);
