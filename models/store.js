@@ -24,6 +24,18 @@ const storeSchema = new Schema({
       ref: "Review",
     },
   ],
+  geometry: {
+    //GeoJSON
+    type: {
+      type: String,
+      enum: ["Point"],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
 });
 
 storeSchema.post("findOneAndDelete", async function (store) {

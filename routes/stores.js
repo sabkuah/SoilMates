@@ -10,18 +10,18 @@ const stores = require("../controllers/stores");
 
 router.get("/", catchAsync(stores.index));
 
+//New Store
+router
+  .route("/new")
+  .get(isLoggedIn, stores.renderNewForm)
+  .post(isLoggedIn, validateStore, catchAsync(stores.createStore));
+
 //Show store, Edit Store, Delete Store
 router
   .route("/:storeId")
   .get(catchAsync(stores.showStore))
   .put(isLoggedIn, isShopAuthor, validateStore, catchAsync(stores.editStore))
   .delete(isLoggedIn, isShopAuthor, catchAsync(stores.deleteStore));
-
-//New Store
-router
-  .route("/new")
-  .get(isLoggedIn, stores.renderNewForm)
-  .post(isLoggedIn, validateStore, catchAsync(stores.createStore));
 
 //Edit Store form
 router.get(

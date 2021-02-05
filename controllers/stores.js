@@ -1,4 +1,7 @@
 const Store = require("../models/store");
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
 //========================
 //       GET ALL
@@ -17,8 +20,15 @@ module.exports.renderNewForm = (req, res) => {
 };
 
 module.exports.createStore = async (req, res, next) => {
+  const geoData = await geocoder //forward GeoCoding: sending location query to mapbox
+    .forwardGeocode({
+      query: req.body.city,
+      limit: 1,
+    })
+    .send();
   const newStore = new Store(req.body);
   newStore.author = req.user._id;
+  newStore.geometry = geoData.body.features[0].geometry;
   await newStore.save();
   console.log("New Store added>>", newStore);
   req.flash("success", "Store added!");

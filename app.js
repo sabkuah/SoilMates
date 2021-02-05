@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -19,13 +23,11 @@ const plantRoutes = require("./routes/plants");
 const storeRoutes = require("./routes/stores");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
-const { required } = require("joi");
 
 //========================
 //   CONNECT DATABASE
 //========================
 
-dotEnv.config();
 //const dbUrl = process.env.DB_URL;
 const dbUrl = "mongodb://localhost:27017/soil-mates";
 
