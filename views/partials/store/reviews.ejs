@@ -2,6 +2,7 @@
   <h1 class="text-center">Reviews</h1>
   <!-- Add Review Collapsible -->
   <div class="store__show-addReview">
+    <% if(currentUser && !store.author.equals(currentUser._id)) { %>
     <p>
       <button
         class="btn btn-success"
@@ -10,10 +11,12 @@
         data-bs-target="#reviewForm"
         aria-expanded="false"
         aria-controls="collapseExample"
+        <%= currentUser ? "" : "disabled" %> 
       >
-        Add A Review
+      <%= currentUser ? "Add A Review" : "Sign-in To Leave A Review" %> 
       </button>
     </p>
+  <% } %> 
 
     <div class="collapse mb-3" id="reviewForm">
       <div class="card card-body">
