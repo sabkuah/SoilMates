@@ -86,15 +86,15 @@
     store.reviews){ %>
     <div class="card m-2">
       <div class="row mb-2">
-        <div class="col-3">
-          <p><%= review.author.username %></p>
-          <p class="text-muted"><%= review.dateAdded%></p>
+        <div class="col-3 d-flex flex-column align-items-center">
+          <p class="fw-bold mb-0 mt-3"><i class="fas fa-user mx-2"></i><%= review.author.username %></p>
+          <p class="text-muted" style="font-size: small;"><%= review.dateAdded%></p>
           <% if(currentUser && review.author.equals(currentUser._id)){ %>
           <form
             action="/stores/<%= store._id %>/reviews/<%= review._id%>?_method=DELETE"
             method="POST"
           >
-            <button class="btn btn-danger">𝗫</button>
+            <button class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
           </form>
           <%}%>
         </div>
@@ -111,7 +111,9 @@
                     Rated: <%= review.service %> stars
               </p></div>
           </div>
-          <div class="text-start"><%= review.body %></div>
+          <div class="speech-bubble">
+            <div class="text-start fw-bold"><%= review.body %></div>
+            </div>
         </div>
       </div>
     </div>

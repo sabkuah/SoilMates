@@ -2,9 +2,9 @@
 <!-- <div class="snakeplant-bg"></div> -->
 
 <div class="store__show">
-  <div class="row d-flex justify-content-center">
+  <div class="d-flex justify-content-center flex-wrap">
     <!-- STORE INFO //LEFT -->
-    <div class="card store__show-card col-5 offset-1">
+    <div class="card store__show-card col-md-5" style="max-width: 90%">
       <h1 class="text-center"><%= store.name %></h1>
       <div class="store__show-details card-body">
         <p>City: <%= store.city %></p>
@@ -26,7 +26,7 @@
     </div>
 
     <!-- STORE IMAGE //RIGHT -->
-    <div class="col-5 d-flex justify-content-center">
+    <div class="col-md-5 d-flex justify-content-center">
       <img
         src="/store.jpg"
         class="img-fluid store__show-img"
