@@ -1,3 +1,6 @@
+<!-- Stars Stylesheet -->
+<link rel="stylesheet" href="/stylesheets/stars.css" />
+
 <div class="store__show-reviews col-10 offset-1 mt-3 py-2">
   <h1 class="text-center">Reviews</h1>
   <!-- Add Review Collapsible -->
@@ -27,27 +30,40 @@
           class="needs-validation"
           novalidate
         >
-          <label for="selection" class="form-label">Selection</label>
-          <input
-            type="range"
-            class="form-range"
-            min="1"
-            max="5"
-            step="1.0"
-            id="selection"
-            name="selection"
-          />
-          <label for="service" class="form-label">Service</label>
-          <input
-            type="range"
-            class="form-range"
-            min="1"
-            max="5"
-            step="1.0"
-            id="service"
-            name="service"
-          />
+        <div class="col-md-8 offset-2">
+          <div class="row justify-content-around">
 
+        <fieldset class="starability-heart m-3">
+          <legend>Selection:</legend>
+          <input type="radio" id="no-rate" class="input-no-rate" name="selection" value="1" checked aria-label="No rating."/>
+          <input type="radio" id="first-rate1" name="selection" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="selection" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="selection" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="selection" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="selection" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+        
+        <fieldset class="starability-heart m-3">
+          <legend>Service:</legend>
+          <input type="radio" id="no-rate" class="input-no-rate" name="service" value="1" checked aria-label="No rating." />
+          <input type="radio" id="second-rate1" name="service" value="1" />
+          <label for="second-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="second-rate2" name="service" value="2" />
+          <label for="second-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="second-rate3" name="service" value="3" />
+          <label for="second-rate3" title="Average">3 stars</label>
+          <input type="radio" id="second-rate4" name="service" value="4" />
+          <label for="second-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="second-rate5" name="service" value="5" />
+          <label for="second-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+    </div>
           <div class="form-group mb-3">
             <label for="body">Review</label>
             <textarea
@@ -84,8 +100,16 @@
         </div>
         <div class="col-9 card-body">
           <div class="row mb-2">
-            <div class="col">Selection: <%= review.selection %></div>
-            <div class="col">Service: <%= review.service %></div>
+            <div class="col d-flex align-items-center">
+              Selection:
+              <p class="starability-result" data-rating="<%= review.selection %>">
+                    Rated: <%= review.selection %> stars
+              </p>
+            </div>
+            <div class="col d-flex align-items-center">Service:
+              <p class="starability-result" data-rating="<%= review.service %>">
+                    Rated: <%= review.service %> stars
+              </p></div>
           </div>
           <div class="text-start"><%= review.body %></div>
         </div>
