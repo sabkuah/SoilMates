@@ -171,7 +171,7 @@ footer {
 /* Parallax Settings */
 
 .cactus-bg {
-  background-image: url("../cacti-bg.jpg");
+  background-image: url("../cacti-bg-min.jpg");
   height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
@@ -180,7 +180,7 @@ footer {
 }
 
 .snakeplant-bg {
-  background-image: url("../snakeplant-bg.png");
+  background-image: url("../snakeplant-bg-min.png");
   height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
@@ -190,7 +190,7 @@ footer {
 }
 
 .eucalyptus-bg {
-  background-image: url("../ecalyptus-bg.jpg");
+  background-image: url("../ecalyptus-bg-min.jpg");
   height: calc(100vh - 56px - 17px);
   background-attachment: fixed;
   background-position: center;
