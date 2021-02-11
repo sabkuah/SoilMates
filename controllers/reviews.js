@@ -19,7 +19,7 @@ module.exports.addReview = async (req, res) => {
   await store.save();
   await review.save();
   req.flash("success", "Added a new review!");
-  res.redirect(`/stores/${store._id}/#reviews`);
+  res.redirect(`/stores/${store._id}/`);
 };
 
 //========================
@@ -33,5 +33,5 @@ module.exports.deleteReview = async (req, res) => {
   await Store.findByIdAndUpdate(storeId, { $pull: { reviews: reviewId } });
   await Review.findByIdAndDelete(reviewId);
   req.flash("success", "Deleted a review!");
-  res.redirect(`/stores/${storeId}/#reviews`);
+  res.redirect(`/stores/${storeId}`);
 };
