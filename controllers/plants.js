@@ -55,7 +55,25 @@ module.exports.renderEditForm = async (req, res) => {
 module.exports.editPlant = async (req, res, next) => {
   const { plantId, storeId } = req.params;
   const plant = await Plant.findByIdAndUpdate(plantId, { ...req.body });
-  console.log("Plant updated>>", plant);
+
+  console.log("req FILES>>>", req.files);
+  const imgs = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
+  plant.images.push(...imgs);
+
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    plant.updateOne({
+      $pull: { images: { filename: { $in: req.body.Images } } },
+    });
+  }
+
+  await plant.save();
+  //console.log("Plant updated>>", plant);
   req.flash("success", "Plant updated!");
   res.redirect(`/stores/${storeId}/plants/${plant._id}`);
 };
