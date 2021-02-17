@@ -4,6 +4,9 @@ const catchAsync = require("../utils/catchAsync");
 const { validatePlant, isLoggedIn, isShopAuthor } = require("../middlewares");
 const plants = require("../controllers/plants");
 
+const multer = require("multer");
+const upload = multer({ storage });
+
 //========================
 //     PLANT ROUTES
 //========================
@@ -16,6 +19,7 @@ router
   .post(
     isLoggedIn,
     isShopAuthor,
+    upload.array("image"),
     validatePlant,
     catchAsync(plants.createNewPlant)
   );
@@ -25,7 +29,13 @@ router
 router
   .route("/:plantId")
   .get(catchAsync(plants.getPlants))
-  .put(isLoggedIn, isShopAuthor, validatePlant, catchAsync(plants.editPlant))
+  .put(
+    isLoggedIn,
+    isShopAuthor,
+    upload.array("image"),
+    validatePlant,
+    catchAsync(plants.editPlant)
+  )
   .delete(isLoggedIn, isShopAuthor, catchAsync(plants.deletePlant));
 
 //=== Edit form ===//
