@@ -29,7 +29,7 @@ module.exports.createNewPlant = async (req, res) => {
   await newPlant.save();
   await store.save();
   console.log("New Plant added>>>", newPlant);
-  console.log("Store Updated>>>", store);
+  //console.log("Store Updated>>>", store);
   req.flash("success", "Plant added!");
   res.redirect(`/stores/${store._id}`);
 };
