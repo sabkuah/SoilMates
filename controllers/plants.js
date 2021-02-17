@@ -20,6 +20,10 @@ module.exports.createNewPlant = async (req, res) => {
   const { storeId } = req.params;
   const store = await Store.findById(storeId);
   const newPlant = new Plant(req.body);
+  newPlant.images = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
   store.plants.push(newPlant);
   newPlant.store = store;
   await newPlant.save();

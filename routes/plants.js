@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const { validatePlant, isLoggedIn, isShopAuthor } = require("../middlewares");
 const plants = require("../controllers/plants");
 
+const { storage } = require("../cloudinary");
 const multer = require("multer");
 const upload = multer({ storage });
 

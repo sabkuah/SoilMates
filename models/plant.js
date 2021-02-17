@@ -1,13 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
+ImageSchema.virtual("thumbnail").get(function () {
+  this.url.replace("/upload", "/upload/w_200");
+});
+
 const PlantSchema = new Schema({
   name: {
     type: String,
   },
-  image: {
-    type: String,
-  },
+  images: [ImageSchema],
   type: {
     type: String,
     lowercase: true,
